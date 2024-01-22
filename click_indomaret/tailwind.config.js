@@ -6,33 +6,22 @@ export default {
       sm: "480px",
       md: "768px",
       lg: "976px",
+      idm: "1080px",
       xl: "1440px",
       xxl: "2560px",
+    },
+    maxWidth: {
+      card: "200px",
     },
 
     extend: {
       // This is for colors
       colors: {
-        blueGrayish: "#272E36",
-        lightBlueGrayish: "#504C4C",
-        darkerBlueGrayish: "#232931",
-        lightGreen: "#14B86E",
-      },
-      backgroundImage: {
-        "team-pattern": "url('./src/assets/aboutus/bg-team.svg')",
-      },
-      maxWidth: {
-        card: "304px",
-        banner: "1009px",
-      },
-      maxHeight: {
-        banner: "363px",
-      },
-      width: {
-        banner: "1009px",
-      },
-      height: {
-        bannner: "363px",
+        Yellow_IDM: "#F7CE46",
+        Red_IDM: "#D41626",
+        Blue_IDM: "#056CB4",
+        Black_IDM: "#272727",
+        White_IDM: "#EFF1F3",
       },
     },
   },
