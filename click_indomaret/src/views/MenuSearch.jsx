@@ -57,7 +57,7 @@ export default function StartingFile() {
             </div>
           </div>
           <div className="mt-5 ">
-            <div className="grid grid-cols-3  gap-y-6">
+            <div className="grid grid-cols-3  gap-y-6 h-[930px] overflow-y-auto no-scrollbar scrollbar-hide">
               {activeMenu === "YummyChoice" &&
                 YummyChoice.map((item, index) => (
                   <MenuCard
