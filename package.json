@@ -1,0 +1,15 @@
+{
+  "name": "clickindomaret",
+  "version": "0.0.1",
+  "description": "click indomaret",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx electronmon ."
+  },
+  "author": "Abraham Pardomuan Naiborhu",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^28.1.4"
+  }
+}
