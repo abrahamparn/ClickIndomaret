@@ -10,7 +10,7 @@ export default function MenuCard(props) {
       <p className="text-lg text-center mb-5 mt-2">
         {props.brand} {props.name}
       </p>
-      <button className="bg-Blue_IDM rounded-lg text-white text-2xl font-semibold pe-4 ps-4 pt-2 pb-2">
+      <button className="bg-Blue_IDM rounded-lg text-white text-2xl font-semibold pe-4 ps-4 pt-2 pb-2 active:bg-Red_IDM" onClick={props.onClick}>
         Rp {props.price}
       </button>
     </div>

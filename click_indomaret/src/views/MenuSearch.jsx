@@ -14,9 +14,14 @@ import MenuCard from "../parts/MenuCard/MenuCard.jsx";
 import { YummyChoice, PointCaffee } from "../data/MenuDataDummy";
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
+  const [activeProduct, setActiveProduct] = useState([0, 0])
 
-  let totalProduk = 9;
-  let totalHarga = "37.000";
+  console.log(activeProduct)
+
+  function updateActiveMenu(itemPrice){
+    setActiveProduct([activeProduct[0]+1, activeProduct[1]+parseInt(itemPrice.split('.').join(''))])
+    
+  }
   return (
     <div className="flex flex-col mx-0 pb-20">
       <div className="w-full bg-red-500">
@@ -57,7 +62,7 @@ export default function StartingFile() {
             </div>
           </div>
           <div className="mt-5 ">
-            <div className="grid grid-cols-3  gap-y-6 h-[930px] overflow-y-auto no-scrollbar scrollbar-hide">
+            <div className="grid grid-cols-3  gap-y-6 md:h-[1080px] idm:h-[1193px] overflow-y-auto no-scrollbar scrollbar-hide">
               {activeMenu === "YummyChoice" &&
                 YummyChoice.map((item, index) => (
                   <MenuCard
@@ -66,6 +71,8 @@ export default function StartingFile() {
                     name={item.name}
                     price={item.price}
                     brand={item.brand}
+                    onClick={()=>{updateActiveMenu(item.price)
+                    }}
                   />
                 ))}
               {activeMenu === "PointCaffee" &&
@@ -76,6 +83,8 @@ export default function StartingFile() {
                     name={item.name}
                     price={item.price}
                     brand={item.brand}
+                    onClick={()=>{updateActiveMenu(item.price)
+                    }}
                   />
                 ))}
             </div>
@@ -84,13 +93,15 @@ export default function StartingFile() {
       </div>
       <div className="grid grid-cols-8 border-t-4 border-gray-370">
         <div className=" col-span-5 flex flex-col ms-12 mt-5">
-          <p className="text-3xl font-semibold mb-5">
-            Total Produk: {totalProduk}
+          <p className="text-3xl font-semibold mb-5"
+          >
+            Total Produk: {activeProduct[0]}
           </p>
-          <p className="text-6xl font-bold mb-5">Rp {totalHarga}</p>
+          <p className="text-6xl font-bold mb-5">Rp {activeProduct[1]}</p>
         </div>
         <div className="col-span-3 pt-10 me-10 ">
-          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM">
+          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
+         >
             Bayar
           </button>
         </div>
