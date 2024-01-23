@@ -17,7 +17,7 @@ function createMainWindow() {
     },
   });
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   mainWindow.setMenuBarVisibility(false);
 
   const startUrl = url.format({
