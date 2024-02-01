@@ -12,6 +12,11 @@ import shopping_basket from "../assets/illustration/shopping-basket.png";
 
 import MenuCard from "../parts/MenuCard/MenuCard.jsx";
 import { YummyChoice, PointCaffee } from "../data/MenuDataDummy";
+
+//For Modal
+import ProductModal from "../components/Modal/ProductModal.jsx";
+import useToggle from "../Hooks/useToggle.js";
+
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
   const [activeProduct, setActiveProduct] = useState([0, 0])
@@ -22,8 +27,16 @@ export default function StartingFile() {
     setActiveProduct([activeProduct[0]+1, activeProduct[1]+parseInt(itemPrice.split('.').join(''))])
     
   }
+
+  // For React
+  const { on, toggler } = useToggle();
   return (
+    
     <div className="flex flex-col mx-0 pb-20">
+
+{on && <ProductModal toggler={toggler} /> /** just added */}
+
+
       <div className="w-full bg-red-500">
         <img src={B_Frappe} className="object-fill bg-black w-full " />
       </div>
@@ -58,6 +71,7 @@ export default function StartingFile() {
               <button className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM">
                 <img src={shopping_basket} alt="Icon" className="mr-2 w-6" />
                 <strong>Keranjang</strong>
+              
               </button>
             </div>
           </div>
@@ -73,6 +87,7 @@ export default function StartingFile() {
                     brand={item.brand}
                     onClick={()=>{updateActiveMenu(item.price)
                     }}
+                    toggler={toggler} 
                   />
                 ))}
               {activeMenu === "PointCaffee" &&

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MenuCard(props) {
   return (
-    <div className="max-w-card flex flex-col justify-center items-center">
+    <div className="max-w-card flex flex-col justify-center items-center"  onClick={() => props.toggler()}>
       <div className="border-2 rounded-lg border-gray-400 min-w-[198.76px] min-h-[198.14px] max-w-[198.76px] max-h-[198.14px] flex items-center">
         <img src={props.image} />
       </div>
