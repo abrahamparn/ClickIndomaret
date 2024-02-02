@@ -19,23 +19,33 @@ import useToggle from "../Hooks/useToggle.js";
 
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
-  const [activeProduct, setActiveProduct] = useState([0, 0])
+  const [activeProduct, setActiveProduct] = useState([0, 0]);
 
-  console.log(activeProduct)
-
-  function updateActiveMenu(itemPrice){
-    setActiveProduct([activeProduct[0]+1, activeProduct[1]+parseInt(itemPrice.split('.').join(''))])
-    
-  }
+  console.log(activeProduct);
+  const handleProductUpdate = (quantity, price) => {
+    setActiveProduct([quantity, activeProduct[1] + quantity * price]);
+  };
 
   // For React
   const { on, toggler } = useToggle();
+
+  // for modal
+  const [selectedItem, setSelectedItem] = useState(null);
+
   return (
-    
     <div className="flex flex-col mx-0 pb-20">
-
-{on && <ProductModal toggler={toggler} /> /** just added */}
-
+      {
+        on && (
+          <ProductModal
+            toggler={toggler}
+            image={selectedItem.image}
+            price={selectedItem.price}
+            name={selectedItem.name}
+            brand={selectedItem.brand}
+            onProductUpdate={handleProductUpdate}
+          />
+        ) /** just added */
+      }
 
       <div className="w-full bg-red-500">
         <img src={B_Frappe} className="object-fill bg-black w-full " />
@@ -71,7 +81,6 @@ export default function StartingFile() {
               <button className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM">
                 <img src={shopping_basket} alt="Icon" className="mr-2 w-6" />
                 <strong>Keranjang</strong>
-              
               </button>
             </div>
           </div>
@@ -85,9 +94,15 @@ export default function StartingFile() {
                     name={item.name}
                     price={item.price}
                     brand={item.brand}
-                    onClick={()=>{updateActiveMenu(item.price)
+                    onClick={() => {
+                      setSelectedItem({
+                        image: item.image,
+                        name: item.name,
+                        price: item.price,
+                        brand: item.brand,
+                      });
                     }}
-                    toggler={toggler} 
+                    toggler={toggler}
                   />
                 ))}
               {activeMenu === "PointCaffee" &&
@@ -98,8 +113,15 @@ export default function StartingFile() {
                     name={item.name}
                     price={item.price}
                     brand={item.brand}
-                    onClick={()=>{updateActiveMenu(item.price)
+                    onClick={() => {
+                      setSelectedItem({
+                        image: item.image,
+                        name: item.name,
+                        price: item.price,
+                        brand: item.brand,
+                      });
                     }}
+                    toggler={toggler}
                   />
                 ))}
             </div>
@@ -108,15 +130,13 @@ export default function StartingFile() {
       </div>
       <div className="grid grid-cols-8 border-t-4 border-gray-370">
         <div className=" col-span-5 flex flex-col ms-12 mt-5">
-          <p className="text-3xl font-semibold mb-5"
-          >
+          <p className="text-3xl font-semibold mb-5">
             Total Produk: {activeProduct[0]}
           </p>
           <p className="text-6xl font-bold mb-5">Rp {activeProduct[1]}</p>
         </div>
         <div className="col-span-3 pt-10 me-10 ">
-          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
-         >
+          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM">
             Bayar
           </button>
         </div>
