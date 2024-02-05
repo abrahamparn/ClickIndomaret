@@ -13,9 +13,12 @@ import shopping_basket from "../assets/illustration/shopping-basket.png";
 import MenuCard from "../parts/MenuCard/MenuCard.jsx";
 import { YummyChoice, PointCaffee } from "../data/MenuDataDummy";
 
-//For Modal
+//For Modal Product
 import ProductModal from "../components/Modal/ProductModal.jsx";
 import useToggle from "../Hooks/useToggle.js";
+
+//For Modal Keranjang
+import KerjanjangModal from "../components/Modal/KerjanjangModal.jsx";
 
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
@@ -23,7 +26,10 @@ export default function StartingFile() {
 
   console.log(activeProduct);
   const handleProductUpdate = (quantity, price) => {
-    setActiveProduct([quantity, activeProduct[1] + quantity * price]);
+    setActiveProduct([
+      quantity + activeProduct[0],
+      activeProduct[1] + quantity * price,
+    ]);
   };
 
   // For React
@@ -34,6 +40,7 @@ export default function StartingFile() {
 
   return (
     <div className="flex flex-col mx-0 pb-20">
+      <KerjanjangModal />
       {
         on && (
           <ProductModal
