@@ -23,16 +23,25 @@ import useToggleCart from "../Hooks/useToggleCart.js"
 
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
-  const [activeProduct, setActiveProduct] = useState([0, 0]);
+  const [activeProduct, setActiveProduct] = useState([0, 0, {}]);
 
-  console.log(activeProduct);
-  const handleProductUpdate = (quantity, price) => {
+  const handleProductUpdate = (quantity, price, name) => {
+    // Destructuring the name object to get key and value
+    const [productName, productQuantity] = Object.entries(name)[0];
+  
+    // Updating the product details object
+    const updatedProductDetails = {
+      ...activeProduct[2],
+      [productName]: (activeProduct[2][productName] || 0) + productQuantity
+    };
+  
+    // Setting the new state
     setActiveProduct([
-      quantity + activeProduct[0],
+      activeProduct[0] + quantity,
       activeProduct[1] + quantity * price,
+      updatedProductDetails
     ]);
   };
-
   // For React
   const { on, toggler } = useToggle();
   const {onCart, togglerCart} = useToggleCart();
@@ -149,7 +158,8 @@ export default function StartingFile() {
           <p className="text-6xl font-bold mb-5">Rp {activeProduct[1]}</p>
         </div>
         <div className="col-span-3 pt-10 me-10 ">
-          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM">
+          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
+          onClick={() => console.log(activeProduct[2])}>
             Bayar
           </button>
         </div>

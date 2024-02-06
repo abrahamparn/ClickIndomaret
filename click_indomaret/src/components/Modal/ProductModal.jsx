@@ -18,7 +18,9 @@ export default function ProductModal(props) {
   const handleOrderClick = () => {
     props.onProductUpdate(
       currentQuantity,
-      parseInt(currentPrice.split(".").join(""))
+      parseInt(currentPrice.split(".").join("")),
+      { [props.name]: currentQuantity }
+      
     );
 
     props.toggler();
