@@ -19,6 +19,7 @@ import useToggle from "../Hooks/useToggle.js";
 
 //For Modal Keranjang
 import KerjanjangModal from "../components/Modal/KerjanjangModal.jsx";
+import useToggleCart from "../Hooks/useToggleCart.js"
 
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
@@ -34,13 +35,18 @@ export default function StartingFile() {
 
   // For React
   const { on, toggler } = useToggle();
+  const {onCart, togglerCart} = useToggleCart();
 
   // for modal
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className="flex flex-col mx-0 pb-20">
-      <KerjanjangModal />
+      {
+      onCart && (<KerjanjangModal 
+                  togglerCart={togglerCart}
+                  />)
+      }
       {
         on && (
           <ProductModal
@@ -85,7 +91,7 @@ export default function StartingFile() {
               />
             </div>
             <div className="col-span-1">
-              <button className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM">
+              <button className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM"  onClick={togglerCart}>
                 <img src={shopping_basket} alt="Icon" className="mr-2 w-6" />
                 <strong>Keranjang</strong>
               </button>
