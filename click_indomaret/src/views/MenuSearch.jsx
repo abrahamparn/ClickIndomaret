@@ -158,10 +158,11 @@ export default function StartingFile() {
           <p className="text-6xl font-bold mb-5">Rp {activeProduct[1]}</p>
         </div>
         <div className="col-span-3 pt-10 me-10 ">
+        <Link to={{ pathname: '../CheckPesanan', data: activeProduct[2] }} >
           <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
           onClick={() => console.log(activeProduct[2])}>
             Bayar
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>
