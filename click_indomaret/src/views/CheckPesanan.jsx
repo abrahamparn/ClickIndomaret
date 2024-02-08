@@ -86,14 +86,11 @@ export default function CheckPesanan(props) {
               Kembali
             </button>
           </Link>
-          <button
-            className="bg-Red_IDM text-white ps-10 pe-10 pt-3 pb-3 rounded-[4px] text-2xl"
-            onClick={() => {
-              console.log(statePayment);
-            }}
-          >
-            Bayar
-          </button>
+          <Link to="/PilihPembayaran">
+            <button className="bg-Red_IDM text-white ps-10 pe-10 pt-3 pb-3 rounded-[4px] text-2xl">
+              Bayar
+            </button>
+          </Link>
         </div>
       </div>
     </div>
