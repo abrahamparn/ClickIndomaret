@@ -20,7 +20,6 @@ export default function ProductModal(props) {
       currentQuantity,
       parseInt(currentPrice.split(".").join("")),
       { [props.name]: currentQuantity }
-      
     );
 
     props.toggler();

@@ -10,6 +10,8 @@ function createMainWindow() {
     title: "My buddy app",
     width: 1020,
     height: 1920,
+    frame: false, // This will create a frameless window.
+
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: true,
@@ -17,7 +19,7 @@ function createMainWindow() {
     },
   });
 
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   mainWindow.setMenuBarVisibility(false);
 
   const startUrl = url.format({

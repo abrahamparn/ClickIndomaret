@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import B_Frappe from "../assets/banner/B_Frappe.png";
 import mister_donut from "../assets/menu/mister_donut.png";
@@ -12,6 +12,7 @@ import shopping_basket from "../assets/illustration/shopping-basket.png";
 
 import MenuCard from "../parts/MenuCard/MenuCard.jsx";
 import { YummyChoice, PointCaffee } from "../data/MenuDataDummy";
+import { useLocation } from "react-router-dom";
 
 //For Modal Product
 import ProductModal from "../components/Modal/ProductModal.jsx";
@@ -19,7 +20,7 @@ import useToggle from "../Hooks/useToggle.js";
 
 //For Modal Keranjang
 import KerjanjangModal from "../components/Modal/KerjanjangModal.jsx";
-import useToggleCart from "../Hooks/useToggleCart.js"
+import useToggleCart from "../Hooks/useToggleCart.js";
 
 export default function StartingFile() {
   const [activeMenu, setActiveMenu] = useState("YummyChoice"); // Initial active menu state
@@ -28,34 +29,37 @@ export default function StartingFile() {
   const handleProductUpdate = (quantity, price, name) => {
     // Destructuring the name object to get key and value
     const [productName, productQuantity] = Object.entries(name)[0];
-  
+
     // Updating the product details object
     const updatedProductDetails = {
       ...activeProduct[2],
-      [productName]: (activeProduct[2][productName] || 0) + productQuantity
+      [productName]: (activeProduct[2][productName] || 0) + productQuantity,
     };
-  
+
     // Setting the new state
     setActiveProduct([
       activeProduct[0] + quantity,
       activeProduct[1] + quantity * price,
-      updatedProductDetails
+      updatedProductDetails,
     ]);
   };
   // For React
   const { on, toggler } = useToggle();
-  const {onCart, togglerCart} = useToggleCart();
+  const { onCart, togglerCart } = useToggleCart();
 
   // for modal
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // for going back
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state?.theSelectedProduct) {
+      setActiveProduct(location.state.theSelectedProduct);
+    }
+  }, [location.state]);
   return (
     <div className="flex flex-col mx-0 pb-20">
-      {
-      onCart && (<KerjanjangModal 
-                  togglerCart={togglerCart}
-                  />)
-      }
+      {onCart && <KerjanjangModal togglerCart={togglerCart} />}
       {
         on && (
           <ProductModal
@@ -100,7 +104,10 @@ export default function StartingFile() {
               />
             </div>
             <div className="col-span-1">
-              <button className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM"  onClick={togglerCart}>
+              <button
+                className="flex items-center h-10 bg-Red_IDM text-white p-1 pe-5 ps-5 rounded-lg active:bg-Blue_IDM"
+                onClick={togglerCart}
+              >
                 <img src={shopping_basket} alt="Icon" className="mr-2 w-6" />
                 <strong>Keranjang</strong>
               </button>
@@ -158,11 +165,14 @@ export default function StartingFile() {
           <p className="text-6xl font-bold mb-5">Rp {activeProduct[1]}</p>
         </div>
         <div className="col-span-3 pt-10 me-10 ">
-        <Link to={{ pathname: '../CheckPesanan', data: activeProduct[2] }} >
-          <button className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
-          onClick={() => console.log(activeProduct[2])}>
-            Bayar
-          </button></Link>
+          <Link to="/CheckPesanan" state={{ activeProduct: activeProduct }}>
+            <button
+              className="font-bold w-full h-full bg-Red_IDM rounded-lg text-white text-6xl active:bg-Blue_IDM"
+              onClick={() => console.log(activeProduct[2])}
+            >
+              Bayar
+            </button>
+          </Link>
         </div>
       </div>
     </div>
