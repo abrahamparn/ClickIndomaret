@@ -86,7 +86,13 @@ export default function CheckPesanan(props) {
               Kembali
             </button>
           </Link>
-          <Link to="/PilihPembayaran">
+          <Link
+            to="/PilihPembayaran"
+            state={{ activeProductPP: statePayment }}
+            onClick={() => {
+              console.log(statePayment);
+            }}
+          >
             <button className="bg-Red_IDM text-white ps-10 pe-10 pt-3 pb-3 rounded-[4px] text-2xl">
               Bayar
             </button>

@@ -3,7 +3,9 @@ import { YummyChoice, PointCaffee } from "../../data/MenuDataDummy";
 import delete_illustration from "../../assets/illustration/delete_illustration.png";
 
 export default function CardProduct(props) {
-  const item = YummyChoice.find((element) => element.name === props.itemName);
+  const item = YummyChoice.concat(PointCaffee).find(
+    (element) => element.name === props.itemName
+  );
   const [currentQuantity, setCurrentQuantity] = useState(props.itemCount);
   const [currentPrice, setCurrentPrice] = useState(item.price);
 

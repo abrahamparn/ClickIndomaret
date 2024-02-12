@@ -3,9 +3,9 @@ import bayar from "../assets/illustration/bayar.png";
 import indomaret from "../assets/indomaret.png";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import qrCode from "../assets/pembayaran/qrCode.png";
+import debit from "../assets/pembayaran/debit.png";
 
-export default function ScanBarcode() {
+export default function MasukanKartuBank() {
   const location = useLocation();
   console.log(location);
   const final = location.state.activeProductPP;
@@ -20,7 +20,7 @@ export default function ScanBarcode() {
         <img src={bayar} className="w-2/4" />
 
         <p className="mt-8 text-5xl font-bold text-center">
-          Scan barcode berikut untuk melakukan pembayaran
+          Silahkan masukkan kartu bank anda untuk melakukan pembayaran
         </p>
         <div className="border-2 border-gray-400 w-[900PX] mt-5 p-5">
           <p className="text-4xl text-center">Total:</p>
@@ -28,8 +28,8 @@ export default function ScanBarcode() {
             Rp{statePayment[1]}
           </p>
         </div>
-        <Link to="/MasukanKartuBank" state={{ activeProductPP: statePayment }}>
-          <img src={qrCode} className="mt-16" />
+        <Link to="/PembayaranBerhasil">
+          <img src={debit} className="mt-16" />
         </Link>
       </div>
 
